@@ -3,8 +3,7 @@
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/nebiolabs/tasmanian/blob/master/LICENSE)
 [![Language](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org)  
   
-# ADpred
-===  
+# ADpred  
 
 A tool for prediction of Transcription Activation Domains from protein sequences.
 

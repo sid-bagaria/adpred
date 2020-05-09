@@ -299,6 +299,32 @@ def create_plot(y_raw, sequence):
     return graphJSON
 
 
+# pick this + flanking residues and do mutagenesis --> [ Take the 30mer that ADpred finds as maximum ]
+def mutate(sequence, position, to_aa):
+    sequence = list(sequence)
+    sequence[position] = to_aa
+    return ''.join(sequence)
+
+
+def mut_analysis(sequence, struct, adpred_wt):
+    adpred_results = np.ones(shape=(len(sequence), len(aa))) * adpred_wt
+    
+    for n_pos, pos in enumerate(sequence):
+        seq = list(sequence)  # make a new copy to work with so all other positions are wild type
+        
+        for n_res, res in enumerate(aa):
+            if res == pos:  # don't compute when it's wild type 
+                continue  
+            else:
+                seq[n_pos] = res
+                Seq = ''.join(seq)
+                struct = psipred(Seq)
+                ohe = prepare_ohe([Seq, struct]).reshape(1,30,23,1)
+                adpred_results[n_pos, n_res] = ADPred.predict(ohe)
+
+    return adpred_results
+
+
 
 error_no_mail = 'No email address provided'
 error_uniprot = 'The most probably Error is that we couldn\'t resolve your uniprot ID. Please '+\
