@@ -5,14 +5,14 @@ This package includes functions to help running adpred model on protein
 sequences.
 '''
 
-__author__ = “Ariel Erijman”
-__copyright__ = “Copyright 2020, ADpred project”
-__credits__ = [“Ariel Erijman”]
-__license__ = “MPL 2.0”
-__version__ = “0.0.1”
-__maintainer__ = “Ariel Erijman”
-__email__ = “aerijman@fredhutch.org”
-__status__ = “Dev”
+__author__ = "Ariel Erijman"
+__copyright__ = "Copyright 2020, ADpred project"
+__credits__ = ["Ariel Erijman"]
+__license__ = "MPL 2.0"
+__version__ = "0.0.1"
+__maintainer__ = "Ariel Erijman"
+__email__ = "aerijman@fredhutch.org"
+__status__ = "Dev"
 
 
 from bin.utils import *
@@ -21,8 +21,56 @@ import os, string
 import resource, time
 from subprocess import Popen, PIPE, call
 
+print(
+'''
+    If you wish to use a local installation of psipred, please indicate this,
+    by assigning the path to local_psipred (e.g. local_psipred = "~/psipred/run_psipred")
+''')
 
-def predict(seq, struct=None)
+# path to a local installation of psipred
+local_psipred = None
+
+def calculate_psipred(fasta_name):
+    '''
+    what it does
+    ------------
+    predict secondaary structure
+
+    parameters
+    ----------
+        - fasta_name: filename of fasta file
+
+    results
+    -------
+        -string of secondary structure elements.
+    '''    
+
+    if local_psipred is not None:
+        command = ['bash', 'local_psipred', fasta_name]
+        struct = Popen(p, stdout=PIPE).communicate()[0].decode('utf-8').strip().replace('C','-')
+    else:
+        struct = get_psipred(fasta_name)
+
+    return struct
+    
+
+# initialize session and define model architecture                          
+K.clear_session()                                                           
+inputs = Input(shape=(30,23,1))                                             
+x = Conv2D(29, (6,23), activation=softplus)(inputs)                         
+x = Flatten()(x)                                                            
+x = Dense(100, activation=softplus, kernel_regularizer=regularizers.l2(0.001))(x)
+x = Dropout(0.5)(x)                                                         
+x = Dense(30, activation=softplus, kernel_regularizer=regularizers.l2(0.001))(x)
+x = Dropout(0.5)(x)                                                         
+x = Dense(1)(x)                                                             
+output = (Activation('sigmoid'))(x)                                         
+ADPred = Model(inputs=inputs, outputs=output)                               
+ADPred.compile(optimizer='adam', loss='binary_crossentropy', metrics=[auc]) 
+ADPred.load_weights('model/ADPred.h5')                                     
+                                                                                
+
+def predict(seq, struct=None):
     '''
     what it does
     ------------
@@ -54,26 +102,19 @@ def predict(seq, struct=None)
         seq = identifier2fasta(seq)
 
     # Initial guess is that psired webserver will be used
-    rand_fasta_name = '.' + str(uuid4()) + '.fasta'
-    with open(rand_fasta_name) as fa:    # needed to post to psipred
-        fa.write(seq)
-    ss = get_psipred(rand_fasta_name)
+    if struct is None:
+        rand_fasta_name = '.' + str(uuid4()) + '.fasta'
+        with open(rand_fasta_name, 'w') as fa:    # needed to post to psipred
+            fa.write(seq)
+        
+        # if preferred, use a local installation of psipred
+        #if local_psipred is not None:
+        #    command = ['bash', 'local_psipred', fasta_name]
+        #    struct = Popen(p, stdout=PIPE).communicate()[0].decode('utf-8').strip().replace('C','-')
+        #else:
+        #    struct = get_psipred(rand_fasta_name)
+        struct = calculate_psipred(rand_fasta_name)
     
-    # initialize session and define model architecture                          
-    K.clear_session()                                                           
-    inputs = Input(shape=(30,23,1))                                             
-    x = Conv2D(29, (6,23), activation=softplus)(inputs)                         
-    x = Flatten()(x)                                                            
-    x = Dense(100, activation=softplus, kernel_regularizer=regularizers.l2(0.001))(x)
-    x = Dropout(0.5)(x)                                                         
-    x = Dense(30, activation=softplus, kernel_regularizer=regularizers.l2(0.001))(x)
-    x = Dropout(0.5)(x)                                                         
-    x = Dense(1)(x)                                                             
-    output = (Activation('sigmoid'))(x)                                         
-    ADPred = Model(inputs=inputs, outputs=output)                               
-    ADPred.compile(optimizer='adam', loss='binary_crossentropy', metrics=[auc]) 
-    ADPred.load_weights('models/ADPred.h5')                                     
-                                                                                
     # extend adapters for the extremes                                          
     seq = ''.join(['G']*15) + seq + ''.join(['G']*15)                           
     struct = ''.join(['-']*15) + struct + ''.join(['-']*15)                     
@@ -113,7 +154,7 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
           in the sequence. The order follows the order of the list utils.aa
     '''    
 
-    adpred_results = np.ones(shape=(len(sequence), len(aa))) * predictions
+    adpred_results = np.ones(shape=(len(sequence), len(aa))) * predictions.reshape(-1,1)
     
     for n_pos, pos in enumerate(sequence):
         seq = list(sequence)  # make a new copy to work with so all other positions are wild type
@@ -126,9 +167,8 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
                 Seq = ''.join(seq)
                 if 'second_struct_on_each_mutant' in args:
                     second_struct = get_psipred(Seq)
-                else:
-                    second_struct = psipred(Seq)
-                ohe = prepare_ohe([Seq, second_struct]).reshape(1,30,23,1)
+
+                ohe = make_ohe(Seq, second_struct).reshape(1,30,23,1)
                 adpred_results[n_pos, n_res] = ADPred.predict(ohe)
 
     return adpred_results
@@ -136,7 +176,15 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
 
 
 
+def plot_heatmap(heatmap):
 
+    f,ax = plt.subplots(1, figsize=(20,20))
+    im = ax.pcolor(heatmap.T)
+    ax.set_xticks(np.arange(30)+0.5)
+    ax.set_xticklabels(gcn4.sequence[108:138])
+    ax.set_yticks(np.arange(20)+0.5)
+    ax.set_yticklabels(adpred.aa)
+    plt.colorbar(im, shrink=0.6)
 
 
 class protein:
@@ -156,42 +204,42 @@ class protein:
                  prot_id = None, 
                  sequence = None, 
                  second_struct = None, 
-                 predictions = None):
+                 predictions = None,
+                 meta_data = None):
         
-        assert prot.prot_id == None and prot_id == None, 
-                "Please, provide with a protein ID or a Sequence" + 
-                " (sequence + some id that you come up with is also good)" 
-        
-        if sequence = None:
-            sequence = identifier2fasta(seq)
-            
+        assert not (prot_id is None and sequence is None), "Please, provide with a protein " +\
+                "ID or a Sequence (sequence + some id that you come up with is also good)" 
+       
         prot.prot_id = prot_id
-        prot.sequence = sequence
+
+        if sequence == None:
+            sequence, meta_data = identifier2fasta(prot_id)
+            
+        prot.sequence = sequence 
+        prot.meta_data = meta_data           
         prot.second_struct = second_struct
         prot.predictions = predictions
-        prot.heatmaps = {i:[] for i in len(sequence)}
+        prot.heatmaps = {i:[] for i in range(len(sequence))}
 
 
 
-    def predict_second_struct(prot, local_psipred=None):
+    def predict_second_struct(prot):
         '''
         what it dodes:
         --------------
         predict secondary structure of protein object
         '''
         rand_fasta_name = '.' + str(uuid4()) + '.fasta'
-        with open(rand_fasta_name) as fa:    # needed to post to psipred
+        with open(rand_fasta_name, 'w') as fa:    # needed to post to psipred
             fa.write(prot.sequence)
 
         # if preferred, use a local installation of psipred
-        if local is not None:
-            command = ['bash', 'local_psipred', fasta_name]
-            prot.second_struct = Popen(p, stdout=PIPE).communicate()[0].decode('utf-8').strip().replace('C','-')
-        else:
-            prot.second_struct = get_psipred(rand_fasta_name)
-    
-        # free disk space
-        os.remove(rand_fasta_name)
+        #if local_psipred is not None:
+        #    command = ['bash', 'local_psipred', fasta_name]
+        #    prot.second_struct = Popen(p, stdout=PIPE).communicate()[0].decode('utf-8').strip().replace('C','-')
+        #else:
+        #    prot.second_struct = get_psipred(rand_fasta_name)
+        prot.second_struct = calculate_psipred(rand_fasta_name)    
 
         return None
         
@@ -201,7 +249,10 @@ class protein:
         use predict method to predict adpred probabilities from sequence
         (see adpred.predict method help)
         '''
-        prot.predictions = predct(prot.sequence, prot.second_struct)
+        if prot.second_struct is None:
+            prot.predict_second_struct()
+
+        prot.predictions = predict(prot.sequence, prot.second_struct)
 
         return None
 

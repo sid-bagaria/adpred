@@ -20,6 +20,10 @@ from time import sleep
 import os, string
 
 
+aa = ['R','H','K','D','E','S','T','N','Q','A','V','L','I','M','F' ,'Y', 'W', 'C','G','P']
+ss = ['E','H','-'] # list of secondary structure elements
+
+
 def make_ohe(seq, struct):
     '''
         function returns the data in ohe shape. The columns correspond to the lexicon.
@@ -31,10 +35,6 @@ def make_ohe(seq, struct):
         NOTE: This function can be vectorized since it will constitute a ufunc 
               and the result matrix should have a shape = (len(sequences), len(lexicon))
     '''
-    # one hot encode data
-    aa = ['R','H','K','D','E','S','T','N','Q','A','V','L','I','M','F' ,'Y', 'W', 'C','G','P']
-    ss = ['E','H','-'] # list of secondary structure elements
-
     # initialize tensors
     ohe_seq = np.zeros(shape=(len(seq), 20))
     ohe_ss = np.zeros(shape=(len(struct),3))
@@ -198,6 +198,7 @@ def get_psipred(filename, email='rfittipaldi@f1.rum'):
     # extract second struct data from horiz file 
     ss = ''.join([i.group(1) for i in re.finditer('Pred: (.*)\n', unfiltered)]).replace("C","-")
 
+    # free disk space
     os.remove(filename)  
 
     return ss
