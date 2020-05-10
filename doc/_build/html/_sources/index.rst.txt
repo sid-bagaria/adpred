@@ -63,8 +63,8 @@ Contents
    :maxdepth: 2
    :titlesonly:
  
-    Installation
+    Installation <installation>
     Module Methods <methods>
     Class protein <protein-class>
-    Application
+    Application <application>
 
