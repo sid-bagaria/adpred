@@ -23,8 +23,11 @@ together with the sequence conforms the input of the CNN model.
 
 By default, adpred uses psipred server to calculate the secondary structure. However, 
 the user can define (after loading the module)::
+
    local_psipred = <path/to/psipred_run>  # e,g, '~/some-path/run_psipred'
+
 or, if run_psipred is loaded into the environment::
+
    local_psipred_env = <command>  # depending on the version, In my case is 'run_psipred'
 
 and adpred will use the local psipred installation.
@@ -60,11 +63,16 @@ Contents
 ========
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 6
    :titlesonly:
- 
-    Installation <installation>
-    Module Methods <methods>
-    Class protein <protein-class>
-    Application <application>
+   :glob:
 
+   Installation <installation>
+   Module Methods <methods>
+   Class protein <protein-class>
+   Application <application>
+
+Credits
+=======
+
+* Ariel Erijman
