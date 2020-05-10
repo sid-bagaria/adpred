@@ -24,6 +24,8 @@ The main goal is to identify regions with high AD function probability in protei
 
 Contributions are welcome and encouraged.
 
+## [Documentation](https://adored.readthedocs.io/en/latest/index.html?highlight=predict)
+
 ## Authors
 * [Ariel Erijman](https://github.com/aerijman)
 
