@@ -7,9 +7,8 @@ Welcome to adpred's docs's documentation!
 =========================================
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Contents:
-   protein-class
+   :maxdepth: 2
+   :caption: protein-class:
 
 
 Indices and tables
