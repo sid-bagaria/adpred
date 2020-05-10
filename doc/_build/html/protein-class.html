@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>testing 1,2,3 &#8212; adpred&#39;s docs  documentation</title>
+    <title>Class protein Attributes &#8212; adpred&#39;s docs  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Another example" href="methods.html" />
+    <link rel="prev" title="Methods" href="methods.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -31,19 +31,47 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="testing-1-2-3">
-<h1>testing 1,2,3<a class="headerlink" href="#testing-1-2-3" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="testing-2-3-4">
-<h2>testing 2,3,4<a class="headerlink" href="#testing-2-3-4" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="como-funciona-esto">
-<h3>Como funciona esto<a class="headerlink" href="#como-funciona-esto" title="Permalink to this headline">¶</a></h3>
-<p>lalala lelele lolo</p>
-<p id="formatting-text">You can represent code blocks fairly easily:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+  <div class="section" id="class-protein-attributes">
+<h1>Class protein Attributes<a class="headerlink" href="#class-protein-attributes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>prot_id</p></li>
+<li><p>sequence</p></li>
+<li><p>second_struct</p></li>
+<li><p>predictions</p></li>
+<li><p>meta_data (usually header of fasta in uniprot)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-protein-methods">
+<h1>Class protein Methods<a class="headerlink" href="#class-protein-methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="predict">
+<h2>predict<a class="headerlink" href="#predict" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="p">()</span>
 </pre></div>
+</td></tr></table></div>
+<div class="section" id="what-it-does">
+<h3>what it does<a class="headerlink" href="#what-it-does" title="Permalink to this headline">¶</a></h3>
+<p>Assigns to each aminoacid of the sequence the probability of being in a
+AD region and populates the object attribute.</p>
 </div>
 </div>
+<div class="section" id="predict-second-struct">
+<h2>predict_second_struct<a class="headerlink" href="#predict-second-struct" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">predict_second_struct</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id1">
+<h3>what it does<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>predict secondary structure of protein object and populates object attribute.</p>
+</div>
+</div>
+<div class="section" id="saturated-mutagenesis">
+<h2>Saturated mutagenesis<a class="headerlink" href="#saturated-mutagenesis" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">saturated_mutagenesis</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">second_struct</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 </div>
 
@@ -66,14 +94,15 @@
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="methods.html"> Module Methods</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#"> Class protein</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Class protein Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#class-protein-methods">Class protein Methods</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="methods.html" title="previous chapter">Another example</a></li>
+      <li>Previous: <a href="methods.html" title="previous chapter">Methods</a></li>
   </ul></li>
 </ul>
 </div>

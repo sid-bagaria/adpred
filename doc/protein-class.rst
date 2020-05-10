@@ -1,20 +1,47 @@
-*************
-testing 1,2,3
-*************
+########################
+Class protein Attributes
+########################
 
+Attributes
+==========
+* prot_id                                
+* sequence                                           
+* second_struct                                           
+* predictions                                            
+* meta_data (usually header of fasta in uniprot) 
 
-#############
-testing 2,3,4
-#############
+#####################
+Class protein Methods
+#####################
 
-Como funciona esto
-==================
-lalala lelele lolo
+predict
+=======
+.. code-block:: python
+    :linenos:
 
-.. _formatting-text:
+    predict()                                                 
+    
+what it does                                                                
+------------                                                                
+Assigns to each aminoacid of the sequence the probability of being in a     
+AD region and populates the object attribute.                                                       
 
+predict_second_struct
+=====================
+.. code-block:: python
+    :linenos:
 
-You can represent code blocks fairly easily::
+    predict_second_struct()                                            
+    
+what it does                                                                
+------------                                                                
+predict secondary structure of protein object and populates object attribute.
 
-   import numpy as np
-   x = np.random.rand(12)
+Saturated mutagenesis
+=====================
+
+.. code-block:: python
+    :linenos:
+
+    saturated_mutagenesis(sequence, second_struct, predictions, *args)
+

@@ -5,8 +5,10 @@ Methods
 predict
 =======
 
-::
-   predict(seq, struct=None):                                                  
+.. code-block:: python
+    :linenos:
+
+    predict(seq, struct=None):                                                  
     
 what it does                                                                
 ------------                                                                
@@ -27,8 +29,11 @@ returns
 
 Saturated mutagenesis
 =====================
-::
-   saturated_mutagenesis(sequence, second_struct, predictions, *args)         
+
+.. code-block:: python
+    :linenos:
+
+    saturated_mutagenesis(sequence, second_struct, predictions, \*args)         
 
 what is does                                                                
 ------------                                                                
@@ -53,18 +58,20 @@ returns
 
 Calculate secondary structure
 =============================
-::
-   calculate_psipred(fasta_name)
+.. code-block:: python
+    :linenos:
+
+    calculate_psipred(fasta_name)
                            
 what it does                                                                
 ------------                                                                
-predict secondaary structure                                                
+predict secondary structure                                                
                                                                             
 parameters                                                                  
 ----------                                                                  
     - fasta_name: filename of fasta file                                    
                                                                             
-results                                                                     
+returns                                                                    
 -------                                                                     
     -string of secondary structure elements.    
 
