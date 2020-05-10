@@ -21,11 +21,25 @@ import os, string
 import resource, time
 from subprocess import Popen, PIPE, call
 
-print(
+import sys
+sys.stderr.write(
 '''
-    If you wish to use a local installation of psipred, please indicate this,
-    by assigning the path to local_psipred (e.g. local_psipred = "~/psipred/run_psipred")
+    \nIf you wish to use a local installation of psipred, please indicate this,
+    by assigning the path to local_psipred (e.g. local_psipred = "~/psipred/run_psipred")\n\n
 ''')
+
+
+__methods__ = '''
+    * ADPred
+    * predict
+    * saturated_mutagenesis
+        
+    * class protein: 
+        - predict
+        - predict_second_struct
+        - saturated_mutagenesis
+    '''
+
 
 # path to a local installation of psipred
 local_psipred = None
