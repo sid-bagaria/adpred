@@ -68,3 +68,7 @@ Contents
     Class protein <protein-class>
     Application <application>
 
+Credits
+=======
+
+* Ariel Erijman
