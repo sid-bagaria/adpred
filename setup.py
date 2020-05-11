@@ -5,14 +5,14 @@ with open('README.md', 'r') as fh:
 
 
 setuptools.setup(
-    name = "ADpred-arielotz"
-    version="0.0.1",
+    name = "adpred",
+    version="0.0.2",
     author="Ariel Erijman",
     author_email="aerijman@fredhutch.org, aerijman@neb.com",
     description="Prediction of Transcription Activation Domains from protein sequences",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/ADpred",
+    url="https://github.com/FredHutch/adpred-pkg",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

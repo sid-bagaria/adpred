@@ -9,7 +9,7 @@ A tool for prediction of Transcription Activation Domains from protein sequences
 
 <!--toc start-->
  * [Goals](#goals)
- * [Documentation](#documentation-sphynx)
+ * [Documentation](https://adored.readthedocs.io/en/latest/)
  * [Contributing](#contributing)
  * [Authors](#authors)
  * [Licence](#licence)
