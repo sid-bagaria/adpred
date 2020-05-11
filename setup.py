@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = "adpred",
-    version="0.0.2",
+    version="0.0.3",
     author="Ariel Erijman",
     author_email="aerijman@fredhutch.org, aerijman@neb.com",
     description="Prediction of Transcription Activation Domains from protein sequences",
