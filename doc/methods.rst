@@ -33,7 +33,7 @@ Saturated mutagenesis
 .. code-block:: python
     :linenos:
 
-    saturated_mutagenesis(sequence, second_struct, predictions, \*args)         
+    saturated_mutagenesis(sequence, second_struct, predictions, *args)         
 
 what is does                                                                
 ------------                                                                
