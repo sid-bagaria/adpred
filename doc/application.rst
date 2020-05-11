@@ -1,6 +1,6 @@
 ############
-Some example
+adpred app
 ###########
 
-Coming soon
-===========
+Application Coming soon
+=======================

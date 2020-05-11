@@ -1,6 +1,6 @@
 ############
-Some example
+adpred app
 ###########
 
-veaMOS
-======
+Application Coming soon
+=======================
