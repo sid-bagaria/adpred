@@ -72,6 +72,14 @@ Contents
    Class protein <protein-class>
    Application <application>
 
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
 Credits
 =======
 
