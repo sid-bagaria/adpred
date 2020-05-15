@@ -16,7 +16,7 @@ It includes **methods** and a **class** to simplify the commands.
 In addition it includes an Web Application for those afraid of using terminal.
 This application is called **adpred-app**
 
-For single predictions use to the `adpred-web server <adpred.fredhutch.org>`_ 
+For single predictions use to the `adpred-web server <http://adpred.fredhutch.org>`_ 
 
 **Adpred** uses psipred to predict secondary structure of the sequences, which, 
 together with the sequence conforms the input of the CNN model.

@@ -44,7 +44,7 @@
 It includes <strong>methods</strong> and a <strong>class</strong> to simplify the commands.</p>
 <p>In addition it includes an Web Application for those afraid of using terminal.
 This application is called <strong>adpred-app</strong></p>
-<p>For single predictions use to the <a class="reference external" href="adpred.fredhutch.org">adpred-web server</a></p>
+<p>For single predictions use to the <a class="reference external" href="http://adpred.fredhutch.org">adpred-web server</a></p>
 <p><strong>Adpred</strong> uses psipred to predict secondary structure of the sequences, which,
 together with the sequence conforms the input of the CNN model.</p>
 <p>By default, adpred uses psipred server to calculate the secondary structure. However,
@@ -62,23 +62,23 @@ the user can define (after loading the module):</p>
 <span class="kn">import</span> <span class="nn">adpred</span>
 
 <span class="c1"># with own sequence:</span>
-<span class="n">sequence</span> <span class="o">=</span> <span class="s2">&quot;ATREFERTATREFERTAADDWLNDCWATREFERTA&quot;</span>
+<span class="n">myProtein</span> <span class="o">=</span> <span class="n">adpred</span><span class="o">.</span><span class="n">protein</span><span class="p">(</span><span class="s2">&quot;ATREFERTATREFERTAADDWLNDCWATREFERTA&quot;</span><span class="p">)</span>
 
 <span class="c1"># with uniprot identifier (example gcn4)</span>
-<span class="n">gcn4</span> <span class="o">=</span> <span class="n">adpred</span><span class="o">.</span><span class="n">protein</span><span class="p">(</span><span class="s1">&#39;GCN4_YEAST&#39;</span><span class="p">)</span>
+<span class="n">myProtein</span> <span class="o">=</span> <span class="n">adpred</span><span class="o">.</span><span class="n">protein</span><span class="p">(</span><span class="s1">&#39;GCN4_YEAST&#39;</span><span class="p">)</span>
 
 <span class="c1"># if secondary structure is not known:</span>
-<span class="n">gcn4</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>   <span class="c1"># This will predict secondary structure</span>
+<span class="n">myProtein</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>   <span class="c1"># This will predict secondary structure</span>
 
 <span class="c1"># If you wish to first get the secondary structure</span>
-<span class="n">gcn4</span><span class="o">.</span><span class="n">predict_second_struct</span><span class="p">()</span>
+<span class="n">myProtein</span><span class="o">.</span><span class="n">predict_second_struct</span><span class="p">()</span>
 
 <span class="c1"># do saturated mutagenesis analysis to 30mer between residue positions 108 and 138.</span>
-<span class="n">gcn4</span><span class="o">.</span><span class="n">saturated_mutagenesis</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">108</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">138</span><span class="p">)</span>
+<span class="n">myProtein</span><span class="o">.</span><span class="n">saturated_mutagenesis</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">108</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">138</span><span class="p">)</span>
 
 <span class="c1"># By default the WT structure is used for all mutants, however,</span>
 <span class="c1"># If you wish to recalculate the secondary structure for each mutant</span>
-<span class="n">gcn4</span><span class="o">.</span><span class="n">saturated_mutagenesis</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">108</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">138</span><span class="p">,</span> <span class="s1">&#39;second_struct_on_each_mutant&#39;</span><span class="p">)</span>
+<span class="n">myProtein</span><span class="o">.</span><span class="n">saturated_mutagenesis</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">108</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">138</span><span class="p">,</span> <span class="s1">&#39;second_struct_on_each_mutant&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -97,7 +97,7 @@ the user can define (after loading the module):</p>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><span class="xref std std-ref">genindex</span></p></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
