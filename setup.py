@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = "adpred",
-    version="1.1.4",
+    version="1.1.5",
     author="Ariel Erijman",
     author_email="aerijman@fredhutch.org, aerijman@neb.com",
     description="Prediction of Transcription Activation Domains from protein sequences",
@@ -21,6 +21,7 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
+        'setuptools==46.4.0',
         'keras==2.2.4',
         'scikit-learn==0.21.3',
         'numpy==1.17.2',
