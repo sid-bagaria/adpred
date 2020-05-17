@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = "adpred",
-    version="1.1.0",
+    version="1.1.1",
     author="Ariel Erijman",
     author_email="aerijman@fredhutch.org, aerijman@neb.com",
     description="Prediction of Transcription Activation Domains from protein sequences",
@@ -28,5 +28,9 @@ setuptools.setup(
         'tensorflow==1.14.0',
         'requests==2.23.0',
         'pandas==0.25.1',
+    ],
+    include_package_data=True,
+    scripts=[
+        'bin/run-adpred'
     ]
 )
