@@ -15,7 +15,7 @@ __email__ = "aerijman@fredhutch.org"
 __status__ = "Dev"
 
 
-from bin.utils import *
+from lib.utils import *
 from uuid import uuid4
 import os, string
 import resource, time
