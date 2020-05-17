@@ -81,7 +81,7 @@ x = Dense(1)(x)
 output = (Activation('sigmoid'))(x)                                         
 ADPred = Model(inputs=inputs, outputs=output)                               
 ADPred.compile(optimizer='adam', loss='binary_crossentropy', metrics=[auc]) 
-ADPred.load_weights(os.path.dirname(__file__) + '/model/ADPred.h5')                                     
+ADPred.load_weights(os.path.dirname(__file__) + '/model/ADpred.h5')                                     
                                                                                 
 
 def predict(seq, struct=None):
