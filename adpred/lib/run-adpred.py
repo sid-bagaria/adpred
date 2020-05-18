@@ -52,8 +52,8 @@ if __name__ == '__main__':
     # open output files
     predictions_f = open(out_prefix + '.predictions.csv','w')
     
-    if 
-    saturated_f = open(out_prefix + '.saturated_mutagenesis.csv','w') 
+    if len(start)>0:
+        saturated_f = open(out_prefix + '.saturated_mutagenesis.csv','w') 
 
     # iniitialize protein 
     p = ADpred.protein(seq_or_id)
@@ -75,5 +75,9 @@ if __name__ == '__main__':
                 
     # close written files
     predictions_f.close()
-    saturated_f.close()
+
+    try:
+        saturated_f.close()
+    except Exception:
+        pass
 
