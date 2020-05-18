@@ -36,7 +36,7 @@ for n,arg in enumerate(sys.argv):
     elif arg in ["-l", "--local-psipred"]:
         local_psipred = sys.argv[n+1]
 
-    elif arg in ["sm", '--saturated-mutagenesis']:
+    elif arg in ["-sm", '--saturated-mutagenesis']:
         start = [int(i) for i in sys.argv[n+1].split(",")]
     
     elif arg in ["-o","--output-prefix"]:
@@ -51,6 +51,8 @@ if __name__ == '__main__':
     
     # open output files
     predictions_f = open(out_prefix + '.predictions.csv','w')
+    
+    if 
     saturated_f = open(out_prefix + '.saturated_mutagenesis.csv','w') 
 
     # iniitialize protein 
