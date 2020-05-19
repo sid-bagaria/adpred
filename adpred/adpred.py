@@ -146,7 +146,7 @@ def predict(seq, struct=None):
     return results
 
 
-def saturated_mutagenesis(sequence, second_struct, predictions, *args):
+def saturated_mutagenesis(sequence, second_struct, prediction, *args):
     '''
     what is does
     ------------
@@ -156,7 +156,7 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
     ----------
         - sequence: Protein sequence
         - second_struct: string of protein secondary structure elements
-        - predictions: numpy array of adpred predictions
+        - prediction: float - prediction of the corresponding 30mer
         
         - optionals
             - 'second_struct_on_each_mutant': string, second_struct will be computed
@@ -168,7 +168,7 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
           in the sequence. The order follows the order of the list utils.aa
     '''    
 
-    adpred_results = np.ones(shape=(len(sequence), len(aa))) * predictions.reshape(-1,1)
+    adpred_results = np.ones(shape=(len(sequence), len(aa))) * prediction
     
     for n_pos, pos in enumerate(sequence):
         seq = list(sequence)  # make a new copy to work with so all other positions are wild type
@@ -293,6 +293,6 @@ class protein:
     
         prot.heatmaps[start] = saturated_mutagenesis(prot.sequence[start:end], 
                                                      prot.second_struct[start:end], 
-                                                     prot.predictions[start:end])
+                                                     prot.predictions[start])
         return None
 
