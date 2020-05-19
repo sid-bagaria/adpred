@@ -28,7 +28,7 @@ HELP = '''
             run-adpred -id GCN4_YEAST -sm 108 -o gcn4_satMut108
             run-adpred -id GCN4_YEAST -sm 50,108 -o gcn4_satMut_50-and-108
 
-'''.format{ADpred.__version__}
+'''.format(ADpred.__version__)
 
 # help is printed by default
 if len(sys.argv)==1 or sys.argv[1] in ["-h","--help"] :
