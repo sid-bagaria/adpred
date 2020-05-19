@@ -185,7 +185,7 @@ def saturated_mutagenesis(sequence, second_struct, predictions, *args):
                 ohe = make_ohe(Seq, second_struct).reshape(1,30,23,1)
                 adpred_results[n_pos, n_res] = ADPred.predict(ohe)
 
-    return adpred_results
+    return np.flipud(adpred_results.T)
 
 
 

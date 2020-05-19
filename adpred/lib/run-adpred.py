@@ -2,6 +2,7 @@
 
 from adpred import ADpred
 import sys
+import numpy as np
 
 HELP = '''
         list of arguments
@@ -62,16 +63,27 @@ if __name__ == '__main__':
     # predict adpred probabilities
     p.predict()
     sys.stderr.write('calculating secondary structure and adpred...')
-    
-    predictions_f.write(','.join(list(p.predictions.astype(str))))
+
+    pred_header = "position, aa_id, raw value, smooth1, smooth2, smooth3"
+    pred_body = zip(np.arange(1,len(p.sequence)+1),
+                    p.sequence,
+                    p.predictions, 
+                    np.convolve(p.predictions, np.ones(10)/10, "same"),  
+                    np.convolve(p.predictions, np.ones(15)/15, "same"))
+                
+    pred_body = '\n'.join(["{},{},{},{},{}".format(i[0],i[1],i[2],i[3],i[4]) for i in pred_body])
+
+    predictions_f.write('\n'.join([pred_header, pred_body]))
     
     # compute saturated mutagenesis
     if len(start)>0:
         for i in start:
-            p.saturated_mutagenesis(i)
+            p.saturated_mutagenesis(i-1)
 
-            string = [','.join(list(k.astype(str))) for k in p.heatmaps[i]]
-            saturated_f.write('>' + str(i) + '\n' + '\n'.join(string) + '\n')
+            string = [j+','+','.join(list(k.astype(str))) for j,k in zip(ADpred.aa[::-1], p.heatmaps[i-1])]
+            saturated_f.write('>' + str(i) + '\n' + '\n'.join(string) + '\n' +\
+                             ','+','.join(list(np.arange(i,i+30).astype(str)))+'\n'+\
+                             ','+','.join(p.sequence[i-1:i+29])+'\n')
                 
     # close written files
     predictions_f.close()
