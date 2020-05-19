@@ -5,7 +5,7 @@ import sys
 import numpy as np
 
 HELP = '''
-        using adpred veriom 1.2.0
+        using adpred veriom {}
     
         list of arguments
         -----------------
@@ -28,7 +28,7 @@ HELP = '''
             run-adpred -id GCN4_YEAST -sm 108 -o gcn4_satMut108
             run-adpred -id GCN4_YEAST -sm 50,108 -o gcn4_satMut_50-and-108
 
-'''
+'''.format{ADpred.__version__}
 
 # help is printed by default
 if len(sys.argv)==1 or sys.argv[1] in ["-h","--help"] :
@@ -60,7 +60,7 @@ for n,arg in enumerate(sys.argv):
 # main
 if __name__ == '__main__':
 
-    sys.stderr.write("using adpred version 1.2.9")
+    sys.stderr.write("using adpred version {}".format(ADpred.__version__))
 
     # open file to output results
     if out_prefix==None:
