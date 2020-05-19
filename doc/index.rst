@@ -11,10 +11,7 @@ Introduction
 ============
 
 adpred is a tool to predict Transcription Activation Domains from protein sequences.  
-It includes **methods** and a **class** to simplify the commands.  
-
-In addition it includes an Web Application for those afraid of using terminal.
-This application is called **adpred-app**
+It includes a **command line script**, **methods** and a **class** to simplify the commands.  
 
 For single predictions use to the `adpred-web server <http://adpred.fredhutch.org>`_ 
 
@@ -33,17 +30,26 @@ or, if run_psipred is loaded into the environment::
 and adpred will use the local psipred installation.
 
 
+The simplest use of the command-line tool is::
 
-The simple and quick use is::
+    run-adpred --uniprot-id GCN4_YEAST
+    
+    # to prompt a help message
+    run-adpred -h
+    
+    # or just
+    run-adpred
+
+The simple and quick use of the python module is::
 
    # import the module  
-   import adpred
+   from adpred import ADpred as adp
    
    # with own sequence:
-   myProtein = adpred.protein("ATREFERTATREFERTAADDWLNDCWATREFERTA")
+   myProtein = adp.protein("ATREFERTATREFERTAADDWLNDCWATREFERTA")
 
    # with uniprot identifier (example gcn4)
-   myProtein = adpred.protein('GCN4_YEAST')
+   myProtein = adp.protein('GCN4_YEAST')
 
    # if secondary structure is not known:
    myProtein.predict()   # This will predict secondary structure
