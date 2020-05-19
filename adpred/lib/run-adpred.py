@@ -17,11 +17,12 @@ HELP = '''
         -sm | --saturated-mutagenesis (list of start positions separated by comma. Ends are starts+30)
         -o  | --output-prefix (if empty will use protein.id. if prot_id not provided it will be empty)
 
+
         examples:
         --------
 
          - To get only AD predictions:
-        run-adpred -id GCN4_YEAST
+            run-adpred -id GCN4_YEAST
 
          - to get also saturated mutagenesis results with AD prediction values: 
             run-adpred -id GCN4_YEAST -sm 108 -o gcn4_satMut108
@@ -79,7 +80,7 @@ if __name__ == '__main__':
     p.predict()
     sys.stderr.write('calculating secondary structure and adpred...')
 
-    pred_header = "position, aa_id, raw value, smooth1, smooth2, smooth3"
+    pred_header = "position, aa_id, raw value, smooth1, smooth2"
     pred_body = zip(np.arange(1,len(p.sequence)+1),
                     p.sequence,
                     p.predictions, 
