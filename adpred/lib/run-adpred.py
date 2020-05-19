@@ -5,6 +5,8 @@ import sys
 import numpy as np
 
 HELP = '''
+        using adpred veriom 1.2.0
+    
         list of arguments
         -----------------
 
@@ -56,6 +58,8 @@ for n,arg in enumerate(sys.argv):
 
 # main
 if __name__ == '__main__':
+
+    sys.stderr.write("using adpred version 1.2.9")
 
     # open file to output results
     if out_prefix==None:
