@@ -9,7 +9,7 @@ __author__ = "Ariel Erijman"
 __copyright__ = "Copyright 2020, ADpred project"
 __credits__ = ["Ariel Erijman"]
 __license__ = "MPL 2.0"
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 __maintainer__ = "Ariel Erijman"
 __email__ = "aerijman@fredhutch.org"
 __status__ = "Dev"
@@ -129,9 +129,9 @@ def predict(seq, struct=None):
         #    struct = get_psipred(rand_fasta_name)
         struct = calculate_psipred(rand_fasta_name)
     
-    # extend adapters for the extremes                                          
-    seq = ''.join(['G']*15) + seq + ''.join(['G']*15)                           
-    struct = ''.join(['-']*15) + struct + ''.join(['-']*15)                     
+    # extend adapters for the extremes #####, unless is a 30mer (e.g. in saturated mutagenesis)
+    seq = ''.join(['G']*15) + seq + ''.join(['G']*15)
+    struct = ''.join(['-']*15) + struct + ''.join(['-']*15)
                                                                                 
     # encode for keras and initialize results                                   
     ohe = make_ohe(seq,struct)                                                  
@@ -293,6 +293,6 @@ class protein:
     
         prot.heatmaps[start] = saturated_mutagenesis(prot.sequence[start:end], 
                                                      prot.second_struct[start:end], 
-                                                     prot.predictions[start])
+                                                     prot.predictions[start+15])
         return None
 

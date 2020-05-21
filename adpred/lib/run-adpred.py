@@ -37,16 +37,16 @@ if len(sys.argv)==1 or sys.argv[1] in ["-h","--help"] :
 
 # defaults
 start = []
-seq_or_id = None
+Id, Seq = None, None
 out_prefix = None
 
 # user set parameters
 for n,arg in enumerate(sys.argv):
     if arg in ["-ID","-id","--uniprot-id","uniprot-ID"]:
-        seq_or_id = sys.argv[n+1]
+        Id = sys.argv[n+1]
 
     elif arg in ["-s","seq","-Seq","--sequence","--Sequence"]:
-        seq_or_id = sys.argv[n+1]
+        Seq = sys.argv[n+1]
 
     elif arg in ["-l", "--local-psipred"]:
         local_psipred = sys.argv[n+1]
@@ -63,18 +63,27 @@ if __name__ == '__main__':
     sys.stderr.write("using adpred version {}".format(ADpred.__version__))
 
     # open file to output results
-    if out_prefix==None:
-        out_prefix = seq_or_id if len(seq_or_id)<=10 else ''
-    
+    if not out_prefix:
+        if Id:
+            out_prefix = Id 
+        elif Seq:
+            out_prefix = Seq[:7]
+        else:
+            sys.stderr.write('You should perovide sequence or uniprot Id..., see --help')
+        
     # open output files
     predictions_f = open(out_prefix + '.predictions.csv','w')
     
     if len(start)>0:
         saturated_f = open(out_prefix + '.saturated_mutagenesis.csv','w') 
 
-    # iniitialize protein 
-    p = ADpred.protein(seq_or_id)
-    sys.stderr.write('retrieving sequence...')
+    # iniitialize protein
+    if Id: 
+        p = ADpred.protein(prot_id=Id)
+        sys.stderr.write('retrieving sequence...')
+    elif Seq:
+        p = ADpred.protein(sequence=Seq)   
+        sys.stderr.write('read sequence ...')
 
     # predict adpred probabilities
     p.predict()
