@@ -9,7 +9,7 @@ __author__ = "Ariel Erijman"
 __copyright__ = "Copyright 2020, ADpred project"
 __credits__ = ["Ariel Erijman"]
 __license__ = "MPL 2.0"
-__version__ = "1.2.7"
+__version__ = "1.2.8"
 __maintainer__ = "Ariel Erijman"
 __email__ = "aerijman@fredhutch.org"
 __status__ = "Dev"
@@ -48,7 +48,7 @@ def calculate_psipred(fasta_name):
     '''
     what it does
     ------------
-    predict secondaary structure
+    predict secondary structure
 
     parameters
     ----------
