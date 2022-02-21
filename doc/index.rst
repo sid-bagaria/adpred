@@ -46,7 +46,7 @@ The simple and quick use of the python module is::
    from adpred import ADpred as adp
    
    # with own sequence:
-   myProtein = adp.protein("ATREFERTATREFERTAADDWLNDCWATREFERTA")
+   myProtein = adp.protein("myProteinName", "ATREFERTATREFERTAADDWLNDCWATREFERTA")
 
    # with uniprot identifier (example gcn4)
    myProtein = adp.protein('GCN4_YEAST')
