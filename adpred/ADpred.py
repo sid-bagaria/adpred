@@ -110,10 +110,14 @@ def predict(seq, struct=None):
     >> adpred(aa, ss)
     >> 
     '''
-
     # providing uniprot-ID
     if np.sum([i in aa for i in seq]) < len(seq):
         seq = identifier2fasta(seq)
+
+    # Could still be that sequence has 'X' so that is not an Id
+    # but it's not a proper sequence
+    if seq == -1:
+        sys.exit("Error: The protein sequence might contain X or other not-allowed characters")
 
     # Initial guess is that psired webserver will be used
     if struct is None:
@@ -136,8 +140,6 @@ def predict(seq, struct=None):
     # encode for keras and initialize results                                   
     ohe = make_ohe(seq,struct)                                                  
     results = np.zeros(len(seq)-30)                                             
-                                                                                
-    print(ohe.shape)                                                            
                                                                                 
     # roll window of predictions                                                
     for n in range(results.shape[0]):                                           
