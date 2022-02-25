@@ -5,7 +5,7 @@ import sys
 import numpy as np
 
 HELP = '''
-        using adpred veriom {}
+        using adpred version {}
     
         list of arguments
         -----------------
