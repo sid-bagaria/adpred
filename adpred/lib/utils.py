@@ -72,7 +72,7 @@ def predict_full(seq, struct, random_id):
     output = (Activation('sigmoid'))(x)
     ADPred = Model(inputs=inputs, outputs=output)
     ADPred.compile(optimizer='adam', loss='binary_crossentropy', metrics=[auc])
-    ADPred.load_weights('models/ADPred.h5')
+    ADPred.load_weights('../models/ADPred.h5')
 
     # extend adapters for the extremes
     seq = ''.join(['G']*15) + seq + ''.join(['G']*15)
